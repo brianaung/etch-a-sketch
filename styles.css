@@ -32,17 +32,8 @@ html, body {
 .menu {
   width: var(--board-size);
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   gap: 10px;
-}
-
-.reset-button {
-  background-image: url('img/reload.png');
-  background-size: 100%;
-  /* margin-left: 50px; */
-  width: 22px;
-  height: 22px;
-  overflow: hidden;
 }
 
 .slider-value {
