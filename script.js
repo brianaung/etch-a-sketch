@@ -1,19 +1,63 @@
-const CELL_WIDTH = 10;  // from CSS: .cell {width: 10px};
-const CELL_BORDER_WIDTH = 2;  // from CSS: .cell {border: ... 1px};
+const CELL_BORDER_WIDTH = 2;
 
 const drawingBoard = document.querySelector('.drawing-board');
 
-/* create a drawing drawingBoard given row and col sizes */
-function makeGrid(rows, cols) {
-  /* set the container width to fit the number of columns */
-  drawingBoard.style.setProperty('width', `${cols * 
-      (CELL_WIDTH + CELL_BORDER_WIDTH)}px`);
+function makeBoard(dim) {
+  let boardSize = drawingBoard.clientWidth;  // get the width of the board excluding borders
+  let cellSize = boardSize/dim - CELL_BORDER_WIDTH;
+  console.log(cellSize);
 
-  for (let i = 0; i < (rows * cols); i++) {
+  for (let i = 0; i < (dim ** 2); i++) {
+    
+    /* create grid cells (dim * dim) */
     const cell = document.createElement('div');
     cell.classList.add('cell');
+    cell.style.setProperty('width', `${cellSize}px`);
+    cell.style.setProperty('height', `${cellSize}px`);
+
+    /* change color on mouse hover */
+    cell.addEventListener('mouseover', () => {
+      cell.style.setProperty('background-color', 'black');
+    });
+
     drawingBoard.appendChild(cell);
   }
 }
 
-makeGrid(64, 64);
+function changeGridSize(size) {
+  while (drawingBoard.firstElementChild) {
+    drawingBoard.removeChild(drawingBoard.firstElementChild);
+  }
+  makeBoard(size);
+}
+
+
+function resetGrid() {
+  const cells = document.querySelectorAll('.cell');
+  cells.forEach(cell => {
+    cell.style.setProperty('background-color', '');
+  });
+}
+
+
+function main() {
+  // create board initially
+  makeBoard(30);
+
+  // button to clear all drawings
+  const resetBtn = document.querySelector('.reset-button');
+  resetBtn.addEventListener('click', resetGrid);
+
+
+  // using range slider: 0 - 60 to change the grid sizes
+  const sliderValue = document.querySelector('.slider-value');
+  const slider = document.querySelector('.slider');
+  slider.addEventListener('input', () => { 
+    changeGridSize(slider.value); 
+    sliderValue.textContent = slider.value;
+  });
+  sliderValue.textContent = slider.value;
+}
+
+// run the program
+main();

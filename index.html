@@ -5,11 +5,21 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="drawing-board">
-    <!-- cells are added from the script -->
-    <!-- <div class=".cell"></div> -->
+  <div class="container">
+    <div class="drawing-board">
+      <!-- cells are added from the script -->
+      <!-- <div class=".cell"></div> -->
+    </div>
+    <div class="menu">
+      <!-- <button class="small">small</button> -->
+      <!-- <button class="large">large</button> -->
+      <div class="size-changer">
+        <div class="slider-value"></div>
+        <input class="slider" autocomplete="off" type="range" min="1" max="60" value="30">
+      </div>
+      <button class="reset-button"></button>
+    </div>
   </div>
-
   <script src="script.js"></script>
 </body>
 </html>
